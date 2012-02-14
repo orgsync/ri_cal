@@ -164,7 +164,7 @@ module RiCal
       class FoldingStream #:nodoc:
         attr_reader :stream #:nodoc:
         def initialize(stream) #:nodoc:
-          @stream = stream || StringIO.new
+          @stream = stream || CRLFStringIO.new
         end
 
         def string #:nodoc:

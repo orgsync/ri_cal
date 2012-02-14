@@ -13,6 +13,12 @@ module RiCal
     autoload :Timezone, "ri_cal/component/timezone.rb"
     autoload :Todo, "ri_cal/component/todo.rb"
 
+    class CRLFStringIO < StringIO
+      def puts(str)
+        super "#{str}\r"
+      end
+    end
+
     class ComponentBuilder #:nodoc:
       def initialize(component)
         @component = component
@@ -227,7 +233,7 @@ module RiCal
 
     # return a string containing the rfc2445 format of the component
     def to_s
-      io = StringIO.new
+      io = CRLFStringIO.new
       export_to(io)
       io.string
     end
