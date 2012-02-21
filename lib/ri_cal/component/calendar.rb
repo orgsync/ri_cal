@@ -38,6 +38,7 @@ module RiCal
         prodid_property.params["X-RICAL-TZSOURCE"] = @tz_source if @tz_source
         export_prop_to(export_stream, "PRODID", prodid_property)
         export_prop_to(export_stream, "CALSCALE", calscale_property)
+        export_prop_to(export_stream, "VERSION", version_property)
         export_prop_to(export_stream, "METHOD", method_property)
       end
 
@@ -228,7 +229,6 @@ module RiCal
       # otherwise to should be an IO to which the iCalendar file contents will be written
       def export(to=nil)
         export_stream = FoldingStream.new(to)
-        export_prop_to(export_stream, "VERSION", version_property)
         export_stream.puts("BEGIN:VCALENDAR")
         export_properties_to(export_stream)
         export_x_properties_to(export_stream)
